@@ -105,6 +105,12 @@ const App = () => {
     
   }
 
+  if (currentResult.startsWith('-')) {
+    displayValue = 'ERROR' //x<0
+  if (currentResult.length > 9) {
+      displayValue = 'ERROR'; //+9
+    }
+
   // Tecla input
   useEffect(() => {
     const handleKeyboardInput = (event) => {
@@ -166,5 +172,5 @@ const App = () => {
     </div>
   )
 }
-
+}
 export default App
