@@ -78,8 +78,98 @@ let calculator = {
    //operando
    calculating(){
     const a = parseFloat(this.data.result, 10)
-    const op = this.data.currentOperation
+    const mate = this.data.currentOperation
     const b = parseFloat(this.data.currentValue, 10)
-   }
+    let result = 0
 
+    //operaciones
+    if(this.data.currentOperation === 'sum'){
+      const sumIssue = 1000000000
+      result = (((a*sumIssue)+(b*sumIssue))/sumIssue)
+    }
+    if(this.data.currentOperation === 'sub'){
+      result = a-b
+    }
+    if(this.data.currentOperation === 'mult'){
+      result = a*b
+    }
+    if(this.data.currentOperation === 'div'){
+      result = a/b
+      if (a === 0 || b === 0){
+        result = "ERROR"
+      }
+    }
+    if(this.data.currentOperation === 'exp'){
+      result = Math.pow(a,b)
+    }
+    if(result < 0){
+      result = "Error"
+    }
+    if(result > 999999999){
+      result = "Error"
+    }
+    this.data.result = null
+    this.data.currentValue = ''+ result
+    this.updateDisplay()
+   },
+
+   //limpia todo "C"
+   clearData(){
+    this.data.currentOperation = null
+    this.data.result = null
+    this.data.currentValue = null
+    this.updateDisplay()
+   },
+
+   //limpia
+   clearCurrent(){
+    this.data.currentValue = null
+    this.updateDisplay()
+   },
+
+   //borrar
+   delete(){
+    const b = this.data.currentValue.slice(0, -1)
+    if (b ===''){
+      this.btnEffect()
+      this.clearCurrent()
+    }else{
+      this.data.currentValue = b
+      this.updateDisplay()
+    }
+   },
+
+   userInput(processInput){
+    if(processInput.type === 'input'){
+      this.setDigit(processInput.value)
+    }
+    if(processInput.type === 'mate'){
+      this.setMate(processInput.value)
+    }
+    if(processInput.type === 'Del'){
+      this.delete()
+    }
+    if(processInput.type === 'result'){
+      this.showResult()
+    }
+    if(processInput.type === 'C'){
+      this.clearData()
+    }
+    if(processInput.type === 'toggle'){
+      this.toggleNum()
+    }
+   },
+
+   //efecto al ingreso
+   setDigit(newDigit){
+    let currentValue = this.data.currentValue
+    if(newDigit === '.' && currentValue.includes('.')){
+      this.btnEffect()
+      return
+    }
+    if(currentValue.lenght === this.data.maxNums){
+      this.btnEffect()
+      return
+    }
+   }
 }
