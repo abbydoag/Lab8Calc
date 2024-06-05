@@ -3,8 +3,7 @@ import Calc from './Calculator.jsx'
 
 function App(){
   return(
-    <div className='App'>
-     <h1>Calculadora</h1>
+    <div>
      <Calc/>
     </div>
   )
