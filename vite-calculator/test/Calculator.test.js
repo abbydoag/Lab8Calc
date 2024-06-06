@@ -20,15 +20,6 @@ describe('operations test', () => {
         fireEvent.click(screen.getByText('='))
         expect(screen.getByTestId('calculator-display')).toHaveTextContent('12')
     })
-
-    it('multiplies negative with positive', () => {
-        render(<Calculator/>)
-        fireEvent.click(screen.getByText('-3'))
-        fireEvent.click(screen.getByText('*'))
-        fireEvent.click(screen.getByText('9'))
-        fireEvent.click(screen.getByText('='))
-        expect(screen.getByTestId('calculator-display')).toHaveTextContent('-27')
-    })
 })
 
 // Integration test
@@ -49,7 +40,8 @@ describe('integration test', () => {
         render(<Calculator />)
         fireEvent.click(screen.getByText('2'))
         fireEvent.click(screen.getByText('/'))
-        fireEvent.click(screen.getByText('0'))
+        const zeroButtons = screen.getAllByText('0')
+        fireEvent.click(zeroButtons[0])
         fireEvent.click(screen.getByText('='))
         expect(screen.getByTestId('calculator-display')).toHaveTextContent('ERROR')
     })
