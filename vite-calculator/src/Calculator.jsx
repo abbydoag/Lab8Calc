@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import '@style/Calculator.css'
+//comentar CSS para pruebas, lo lee tambien
+//import './style/Calculator.css'
 
 const Calculator = () => {
   const [maxChars] = useState(10)
@@ -136,6 +137,9 @@ const Calculator = () => {
         break
       case 'div':
         resultValue = a/b
+        if(b===0){
+          resultValue ='ERROR'
+        }
         break
       case 'sub':
         resultValue = a-b
@@ -175,7 +179,7 @@ const Calculator = () => {
   //teclado 
   return (
     <div className="calculator">
-      <div className="calculator-display">{currentValue}</div>
+      <div className="calculator-display" data-testid="calculator-display" >{currentValue}</div>
       <div className="calculator-buttons">
       <button className="calculator-button" data-keycode="49" onClick={() => setNumber('1')}>1</button>
         <button className="calculator-button" data-keycode="50" onClick={() => setNumber('2')}>2</button>
